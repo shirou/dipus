@@ -55,6 +55,7 @@ Register sphinx document
      dipus_host_url = "http://192.168.1.20:9876"
      dipus_index = "test_rst"
 
+
 2. Run builder
 
    ::
@@ -62,6 +63,7 @@ Register sphinx document
      % sphinx-build -b dipus source build
 
    CAUTION: builder will *overwrite* _static/search_dipus.js and _template/search_dipus.html.
+
 
 3. copy search file
 
@@ -72,6 +74,7 @@ Register sphinx document
      % cp _template/search_dipus.html _template_search.html
 
    If you have created your own search.html, please merge it.
+
 
 4. make html as usual::
 
@@ -90,7 +93,7 @@ Just open your search box and type.
 Requirements
 ----------------
 
-- Python 2.7 (sorry, not 3.3 currently)
+- Python 2.7 (sorry, not 3 currently)
 - sphinx
 - whoosh
 - simplejson
@@ -110,9 +113,10 @@ TODO
 
 - test test test
 - Security
-- Python 3.3
+- Python 3
 - Admin Screen
 - correct highlighting(a.k.a. snippet) on the search result
 - logging
 - search over multiple documents
 - Analyzer selected by each document
+

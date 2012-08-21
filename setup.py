@@ -17,7 +17,6 @@ requirements = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: BSD License",
-    "Programming Language :: Python :: 2.6",
     "Programming Language :: Python :: 2.7",
     "Topic :: Database :: Database Engines/Servers",
     "Topic :: Software Development :: Documentation",
