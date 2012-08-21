@@ -3,8 +3,6 @@ import sys
 
 from setuptools import setup, find_packages
 
-import dipus
-
 
 requirements = [
     "bottle",
@@ -25,7 +23,7 @@ classifiers = [
 
 setup(
     name='dipus',
-    version=dipus.__version__,
+    version="0.0.2",
     description='Dipus is a simple full-text search server using Whoosh for Sphinx',
     long_description=open("README.rst").read(),
     classifiers=classifiers,
