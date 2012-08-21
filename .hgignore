@@ -1,0 +1,13 @@
+syntax: glob
+*~
+*.pyc
+.zsh-history*
+test/index
+conf.json
+build
+dipus.egg-info/
+dist
+test/rst/_build/
+test/rst/_static/search_dipus.js
+
+
