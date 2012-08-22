@@ -41,7 +41,7 @@ def register_worker():
                 date=datetime.now(),
                 content=posted['message']
                 )
-            writer.commit(optimize=True)
+            writer.commit()
             ix.close()
         except index.IndexError, e:  # use for returning error
             print "IndexError", e
