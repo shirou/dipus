@@ -4,6 +4,7 @@
 import os
 import Queue
 import threading
+import logging
 from datetime import datetime
 
 from whoosh import index
@@ -53,6 +54,7 @@ def register_worker():
         posted = taskq.get()
         commit(posted)
         taskq.task_done()
+        logging.info("commit done: left = {0}".format(taskq.qsize()))
 
 
 def open_index(indexdir):
@@ -75,7 +77,8 @@ def register(posted, indexroot):
     """
     posted['indexroot'] = indexroot
     taskq.put(posted)
-
+    logging.info("taskq put: left = {0}".format(taskq.qsize()))
+    
     ret = {
         "ok": True,
         "_index": posted["_index"],

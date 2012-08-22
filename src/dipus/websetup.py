@@ -3,8 +3,8 @@
 
 import sys
 import argparse
+import logging
 
-import json
 from bottle import Bottle, route, run, request, response, abort
 from bottle import SimpleTemplate
 import simplejson
@@ -98,6 +98,9 @@ if __name__ == '__main__':
         exit(0)
 
     conf = config.Config(args.conffile[0])
+    
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s %(levelname)s %(message)s')
 
     run(app,
         host=conf.host, port=conf.port,
