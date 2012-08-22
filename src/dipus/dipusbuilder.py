@@ -64,14 +64,18 @@ class DipusBuilder(Builder):
 
         # TODO: fix if multiple html_static_path
         # TODO: should check files exist?
-        js_path = os.path.join(self.config.html_static_path[0],
-                               "search_dipus.js")        
+        path = self.config.html_static_path[0]
+        if not os.path.exists(path):
+            os.mkdir(path)
+        js_path = os.path.join(path, "search_dipus.js")        
         js = search_js_t.template.format(dipus_url=dipus_url)
         with open(js_path, "w") as fp:
             fp.write(js)
 
-        html_path = os.path.join(self.config.templates_path[0],
-                                 "search_dipus.html")
+        path = self.config.templates_path[0]
+        if not os.path.exists(path):
+            os.mkdir(path)
+        html_path = os.path.join(path, "search_dipus.html")
         html = search_html_t.template.format()
         with open(html_path, "w") as fp:
             fp.write(html)
