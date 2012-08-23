@@ -241,5 +241,12 @@ texinfo_documents = [
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
 
-dipus_host_url = "http://192.168.1.20:9876"
-dipus_index = "test_rst"
+#----- Dipus Settings
+
+#dipus_host_url = "http://192.0.2.20"
+#  url of dipus server
+#  Default is "http://localhost:9876" 
+
+#dipus_index = "test_rst"
+#  identifier of this document
+#  Default is same as 'project' in conf.py

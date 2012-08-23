@@ -8,7 +8,7 @@ class Config():
     port = 9876
     indexroot = None
     password = None
-    host = "localhost"
+    host = "0.0.0.0"
 
     def __init__(self, conffile):
         self.read(conffile)
@@ -16,9 +16,13 @@ class Config():
     def read(self, conffile):
         with open(conffile) as fp:
             d = simplejson.load(fp)
-            self.port = d['port']
+            if 'port' in d:
+                self.port = d['port']
+            if 'host' in d:
+                self.host = d['host']
+            if 'indexroot' not in d:
+                raise Exception("No indexroot setting in config.json")
             self.indexroot = d['indexroot']
-            self.host = d['host']
     
     
 if __name__ == '__main__':

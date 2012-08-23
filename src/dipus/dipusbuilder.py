@@ -18,6 +18,9 @@ import simplejson
 import search_html_t  # template of search_dipus.html
 import search_js_t  # template of search_dipus.js
 
+DEFAULT_HOST="localhost"
+DEFAULT_PORT="9876"
+
 
 class DipusWriter(writers.Writer):
     def __init__(self, builder):
@@ -30,7 +33,7 @@ class DipusWriter(writers.Writer):
             t = node.astext()
             if t:
                 return t
-
+    
     def write(self, docname, doctree, conf):
         title = self.getTitle(doctree)
         params = urllib.urlencode({
@@ -88,15 +91,17 @@ class DipusBuilder(Builder):
 
     def prepare_writing(self, docnames):
         self.writer = DipusWriter(self)
+        if self.config.dipus_host_url is None:
+            self.config.dipus_host_url = "http://{0}:{1}".format(
+                DEFAULT_HOST, DEFAULT_PORT)
+        if self.config.dipus_index is None:
+            # if dipus_index is not set, use project name
+            self.config.dipus_index = urllib.quote(self.config.project)
+
         self.output_templates(self.config.dipus_host_url,
                               self.config.dipus_index)
 
     def write_doc(self, docname, doctree):
-        if self.config.dipus_host_url is None:
-            raise SphinxError("dipus_host_url is not set")
-        if self.config.dipus_index is None:
-            raise SphinxError("dipus_index is not set")
-
         conf = {
             'host_url': self.config.dipus_host_url,
             '_index': self.config.dipus_index,
