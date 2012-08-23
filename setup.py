@@ -23,7 +23,7 @@ classifiers = [
 
 setup(
     name='dipus',
-    version="0.0.3",
+    version="0.0.4",
     description='Dipus is a simple full-text search server using Whoosh for Sphinx',
     long_description=open("README.rst").read(),
     classifiers=classifiers,
