@@ -71,7 +71,7 @@ Register sphinx document
 
    ::
 
-     % cp _template/search_dipus.html _template_search.html
+     % cp _template/search_dipus.html _template/search.html
 
    If you have created your own search.html, please merge it.
 
