@@ -38,10 +38,10 @@ conf.json example
 ::
 
   {
-    "host": "192.168.1.20"
-    "port": 9876,
     "indexroot": "/path/to/index"
   }
+
+Dipus server default url is "http://0.0.0.0:9876".
 
 Register sphinx document
 +++++++++++++++++++++++++++++++++++
@@ -52,8 +52,17 @@ Register sphinx document
 
      extensions = ['dipus.dipusbuilder']
 
-     dipus_host_url = "http://192.168.1.20:9876"
-     dipus_index = "test_rst"
+  and there are optional settings.
+
+  ::
+
+     #dipus_host_url = "http://192.0.2.20"
+     #  url of dipus server
+     #  Default is "http://localhost:9876" 
+     
+     #dipus_index = "test_rst"
+     #  identifier of this document
+     #  Default is same as 'project' in conf.py
 
 
 2. Run builder
@@ -76,13 +85,29 @@ Register sphinx document
    If you have created your own search.html, please merge it.
 
 
-4. make html as usual::
+4. make html as usual
+
+   ::
 
      % make html
 
 Note about builder will be done quickly, as "fire-and-forget". But
 indexing itself on the server is not so quick. Please be patient until
 all your document will be indexed.
+
+
+5. (optional) add dipus builder to Makefile
+
+   Add line which invoke dipus builder in the html section in Makefile
+   as blow.
+
+   ::
+
+      html:
+      	$(SPHINXBUILD) -b dipus $(ALLSPHINXOPTS) $(BUILDDIR)/html
+      	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+    
+    Then, whenever type 'make html', documents are registerd.
 
 
 Search from sphinx document
