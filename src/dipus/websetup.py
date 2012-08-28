@@ -86,19 +86,13 @@ def query(_index):
 
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description='Dipus: simple full-text search server')
-    parser.add_argument('-c', '--config', nargs=1,
+    parser.add_argument('-c', '--config', nargs='?',
                         dest='conffile', action='store',
                         help='Config file path')
     args = parser.parse_args()
+    conf = config.Config(args.conffile)
 
-    if args.conffile is None:  # FIXME: why nargs ignored?
-        parser.print_help()
-        exit(0)
-
-    conf = config.Config(args.conffile[0])
-    
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(levelname)s %(message)s')
 
