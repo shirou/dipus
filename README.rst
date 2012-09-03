@@ -56,7 +56,7 @@ Register sphinx document
 
   ::
 
-     #dipus_host_url = "http://192.0.2.20"
+     #dipus_server_url = "http://192.0.2.20"
      #  url of dipus server
      #  Default is "http://localhost:9876" 
      

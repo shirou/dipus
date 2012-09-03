@@ -44,7 +44,7 @@ class DipusWriter(writers.Writer):
             'password': conf['password']
             })
 
-        url = conf['host_url'] + '/' + conf['_index']
+        url = conf['server_url'] + '/' + conf['_index']
         ret = urllib.urlopen(url, params).read()
 
         result = simplejson.loads(ret)
@@ -59,11 +59,11 @@ class DipusBuilder(Builder):
     format = 'search'
     out_suffix = ''
 
-    def output_templates(self, host_url, _index):
-        host_url = host_url.rstrip("/")
+    def output_templates(self, server_url, _index):
+        server_url = server_url.rstrip("/")
         _index = _index.rstrip("/")
         
-        dipus_url = "/".join([host_url, _index, "_search"])
+        dipus_url = "/".join([server_url, _index, "_search"])
 
         # TODO: fix if multiple html_static_path
         # TODO: should check files exist?
@@ -91,19 +91,19 @@ class DipusBuilder(Builder):
 
     def prepare_writing(self, docnames):
         self.writer = DipusWriter(self)
-        if self.config.dipus_host_url is None:
-            self.config.dipus_host_url = "http://{0}:{1}".format(
+        if self.config.dipus_server_url is None:
+            self.config.dipus_server_url = "http://{0}:{1}".format(
                 DEFAULT_HOST, DEFAULT_PORT)
         if self.config.dipus_index is None:
             # if dipus_index is not set, use project name
             self.config.dipus_index = urllib.quote(self.config.project)
 
-        self.output_templates(self.config.dipus_host_url,
+        self.output_templates(self.config.dipus_server_url,
                               self.config.dipus_index)
 
     def write_doc(self, docname, doctree):
         conf = {
-            'host_url': self.config.dipus_host_url,
+            'server_url': self.config.dipus_server_url,
             '_index': self.config.dipus_index,
             'password': self.config.dipus_password
             }
@@ -112,7 +112,7 @@ class DipusBuilder(Builder):
 
 
 def setup(app):
-    app.add_config_value('dipus_host_url', None, '')
+    app.add_config_value('dipus_server_url', None, '')
     app.add_config_value('dipus_index', None, '')
     app.add_config_value('dipus_password', None, '')
     app.add_builder(DipusBuilder)
