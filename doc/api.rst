@@ -77,7 +77,7 @@ search
 
   curl -XGET 'http://localhost:9200/spam/_search?q=Test'
     or 
-  curl -XGET 'http://localhost:9200/spam/_search?q=Test?callback=jsonp10293'
+  curl -XGET 'http://localhost:9200/spam/_search?q=Test&callback=jsonp10293'
 
 ::
 
@@ -98,6 +98,18 @@ search
         ]
     }
 }
+
+multi search
+------------------
+
+search from multiple indexes.
+
+::
+
+  curl -XGET 'http://localhost:9200/_msearch?q=Test&indexes=spam,ham'
+    or 
+  curl -XGET 'http://localhost:9200/_msearch?q=Test&indexes=spam,ham&callback=jsonp10293'
+
 
 
 list

@@ -75,6 +75,43 @@ def updateDocument(_index):
     return simplejson.dumps(ret)
 
 
+@app.route('/_msearch/')
+def multisearch():
+    password = request.forms.get('password')
+    if auth(password) is False:
+        abort(403)  # forbidden
+    
+    query = request.query.get('q')
+    indexes = request.query.get('indexes')
+    if query is None or indexes is None or len(indexes) == 0:
+        abort(400, "query or indexes is not set")
+
+    results = []
+    total = 0
+
+    for idx in indexes.split(","):
+        if idx in docstore.listindex(conf.indexroot):
+            s_r = docstore.search(idx, query, conf.indexroot)
+            for r in s_r:  # flatten
+                results.append(r)
+            total += len(r)
+    
+    ret = {
+        "total": total,
+        "hits": results
+        }
+
+    # FIXME: duplicate code.
+    json_response = simplejson.dumps(ret)
+    response.content_type = 'application/json; charset=utf-8'
+
+    callback_function = request.GET.get('callback')
+    if callback_function:
+        json_response = ''.join([callback_function, '(', json_response, ')'])
+
+    return json_response
+
+
 @app.route('/<_index>/_search')
 def query(_index):
     password = request.forms.get('password')
