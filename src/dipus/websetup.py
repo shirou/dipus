@@ -9,7 +9,7 @@ from bottle import Bottle, route, run, request, response, abort
 from bottle import SimpleTemplate
 import simplejson
 
-from docstore import register, search
+import docstore
 
 import config
 
@@ -54,7 +54,7 @@ def updateDocument(_index):
         'title': title.decode('utf-8')
         }
 
-    ret = register(posted, conf.indexroot)
+    ret = docstore.register(posted, conf.indexroot)
 
     return simplejson.dumps(ret)
 
@@ -67,7 +67,7 @@ def query(_index):
 
     query = request.query.get('q')
 
-    results = search(_index, query, conf.indexroot)
+    results = docstore.search(_index, query, conf.indexroot)
 
     ret = {
         "total": len(results),
