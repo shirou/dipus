@@ -119,6 +119,11 @@ def search(_index, query, indexroot):
 
     return ret
 
+
+def listindex(indexroot):
+    ''' return index list '''
+    return os.listdir(indexroot)
+
 #
 # Creating Task Queue due to commit is too slow
 #

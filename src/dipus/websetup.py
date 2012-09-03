@@ -28,6 +28,21 @@ def index():
     return "index"
 
 
+@app.route('/_list/')
+def listindex():
+    ''' return index list '''
+    password = request.forms.get('password')
+    if auth(password) is False:
+        abort("Forbidden")
+
+    ret = {
+        "list": docstore.listindex(conf.indexroot)
+        }
+
+    return simplejson.dumps(ret)
+
+
+
 @app.route('/<_index>', method='POST')
 def updateDocument(_index):
     password = request.forms.get('password')
