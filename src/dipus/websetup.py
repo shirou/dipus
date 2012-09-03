@@ -33,7 +33,7 @@ def listindex():
     ''' return index list '''
     password = request.forms.get('password')
     if auth(password) is False:
-        abort("Forbidden")
+        abort(403)
 
     ret = {
         "list": docstore.listindex(conf.indexroot)
@@ -43,12 +43,13 @@ def listindex():
 
 
 
+
 @app.route('/<_index>', method='POST')
 def updateDocument(_index):
     password = request.forms.get('password')
 
     if auth(password) is False:
-        abort("Forbidden")
+        abort(403)
 
     path = request.forms.get('path')
     if not path:
@@ -78,7 +79,7 @@ def updateDocument(_index):
 def query(_index):
     password = request.forms.get('password')
     if auth(password) is False:
-        abort("Forbidden")
+        abort(403)
 
     query = request.query.get('q')
 
@@ -88,7 +89,6 @@ def query(_index):
         "total": len(results),
         "hits": results
         }
-
 
     json_response = simplejson.dumps(ret)
     response.content_type = 'application/json; charset=utf-8'
