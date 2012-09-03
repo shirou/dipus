@@ -99,3 +99,20 @@ search
     }
 }
 
+
+list
+---------
+
+return index list in the dipus server.
+
+
+::
+
+  curl -XGET 'http://localhost:9200/_list/
+
+
+::
+
+  {"list": 
+        ["pythondocja", "sphinxjp", "Dipus Test Document", "test_rst"]
+  }
