@@ -57,7 +57,7 @@ def register_worker():
         commit(posted)
         taskq.task_done()
         logging.info("commit done: left = {0}".format(taskq.qsize()))
-    
+
 
 def open_index(indexdir):
     if not os.path.exists(indexdir):
@@ -80,7 +80,7 @@ def register(posted, indexroot):
     posted['indexroot'] = indexroot
     taskq.put(posted)
     logging.info("taskq put: left = {0}".format(taskq.qsize()))
-    
+
     ret = {
         "ok": True,
         "_index": posted["_index"],
@@ -149,5 +149,3 @@ if __name__ == '__main__':
             print "-----"
             print("Contains:", hit.matched_terms())
             print hit.highlights('content')
-
-

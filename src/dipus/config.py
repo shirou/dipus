@@ -35,8 +35,7 @@ class Config():
                 self.indexroot = d['indexroot']
             else:
                 self.create_defaultindexroot()
-    
-    
+
+
 if __name__ == '__main__':
     pass
-

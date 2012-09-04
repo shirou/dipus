@@ -18,8 +18,8 @@ import simplejson
 import search_html_t  # template of search_dipus.html
 import search_js_t  # template of search_dipus.js
 
-DEFAULT_HOST="localhost"
-DEFAULT_PORT="9876"
+DEFAULT_HOST = "localhost"
+DEFAULT_PORT = "9876"
 
 
 class DipusWriter(writers.Writer):
@@ -33,7 +33,7 @@ class DipusWriter(writers.Writer):
             t = node.astext()
             if t:
                 return t
-    
+
     def write(self, docname, doctree, conf):
         title = self.getTitle(doctree)
         params = urllib.urlencode({
@@ -49,7 +49,7 @@ class DipusWriter(writers.Writer):
         ret = urllib.urlopen(url, params).read()
 
         result = simplejson.loads(ret)
-        
+
         if 'ok' not in result or result['ok'] is not True:
             print "Error"
             print result
@@ -63,7 +63,7 @@ class DipusBuilder(Builder):
     def output_templates(self, server_url, _index):
         server_url = server_url.rstrip("/")
         _index = _index.rstrip("/")
-        
+
         dipus_url = "/".join([server_url, _index, "_search"])
 
         # TODO: fix if multiple html_static_path
@@ -71,7 +71,7 @@ class DipusBuilder(Builder):
         path = self.config.html_static_path[0]
         if not os.path.exists(path):
             os.mkdir(path)
-        js_path = os.path.join(path, "search_dipus.js")        
+        js_path = os.path.join(path, "search_dipus.js")
         js = search_js_t.template.format(dipus_url=dipus_url)
         with open(js_path, "w") as fp:
             fp.write(js)

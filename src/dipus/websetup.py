@@ -42,8 +42,6 @@ def listindex():
     return simplejson.dumps(ret)
 
 
-
-
 @app.route('/<_index>', method='POST')
 def updateDocument(_index):
     password = request.forms.get('password')
@@ -66,7 +64,7 @@ def updateDocument(_index):
     doc_url = request.forms.get('doc_url')
     if not doc_url:
         doc_url = ""
-        
+
     posted = {
         '_index': _index.decode('utf-8'),
         'path': path.decode('utf-8'),
@@ -85,7 +83,7 @@ def multisearch():
     password = request.forms.get('password')
     if auth(password) is False:
         abort(403)  # forbidden
-    
+
     query = request.query.get('q')
     indexes = request.query.get('indexes')
     if query is None or indexes is None or len(indexes) == 0:
@@ -100,7 +98,7 @@ def multisearch():
             for r in s_r:  # flatten
                 results.append(r)
             total += len(r)
-    
+
     ret = {
         "total": total,
         "hits": results
