@@ -221,6 +221,7 @@ $(document).ready(function() {
 		if (query !== "" && indexes.length > 0){
 			Search.performSearch(query, indexes);
 		}
+		return(false);
 	});
 
 });
