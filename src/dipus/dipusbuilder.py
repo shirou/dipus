@@ -41,6 +41,7 @@ class DipusWriter(writers.Writer):
             'title': title.encode('utf-8'),
             'message': doctree.astext().encode('utf-8'),
             '_index': conf['_index'],
+            'doc_url': conf['doc_url'],
             'password': conf['password']
             })
 
@@ -101,6 +102,9 @@ use dipus_server_url")
         if self.config.dipus_server_url is None:
             self.config.dipus_server_url = "http://{0}:{1}".format(
                 DEFAULT_HOST, DEFAULT_PORT)
+        if self.config.dipus_doc_url is None:
+            html_dir = os.path.join(self.outdir, 'html')
+            self.config.dipus_doc_url = "file:///{0}".format(html_dir)
         if self.config.dipus_index is None:
             # if dipus_index is not set, use project name
             self.config.dipus_index = urllib.quote(self.config.project)
@@ -111,6 +115,7 @@ use dipus_server_url")
     def write_doc(self, docname, doctree):
         conf = {
             'server_url': self.config.dipus_server_url,
+            'doc_url': self.config.dipus_doc_url,
             '_index': self.config.dipus_index,
             'password': self.config.dipus_password
             }
@@ -120,6 +125,7 @@ use dipus_server_url")
 
 def setup(app):
     app.add_config_value('dipus_server_url', None, '')
+    app.add_config_value('dipus_doc_url', None, '')
     app.add_config_value('dipus_index', None, '')
     app.add_config_value('dipus_password', None, '')
 
