@@ -1,0 +1,13 @@
+.form-inline .checkbox {
+  padding-left: 10px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+span.highlighted {
+	background-color: #FBE54E;
+}
+
+ul.search li a{
+	font-weight: bold;
+}

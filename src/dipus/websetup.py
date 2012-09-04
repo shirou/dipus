@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import sys
 import argparse
 import logging
 
 from bottle import Bottle, route, run, request, response, abort
-from bottle import SimpleTemplate
+from bottle import Jinja2Template
+from bottle import static_file
 import simplejson
 
 import docstore
@@ -36,7 +38,21 @@ def auth(password):
 
 @app.route('/')
 def index():
-    return "index"
+    distdir = os.path.dirname(os.path.abspath(__file__))
+    tpl = os.path.join(distdir, '_templates/index.tpl')
+    return Jinja2Template(name=tpl).render(var='var')
+
+
+@app.route('/favicon.ico')
+def favicon():
+    pass
+
+
+@app.route('/_static/<filename:path>')
+def static_files(filename):
+    distdir = os.path.dirname(os.path.abspath(__file__))
+    static_dir = os.path.join(distdir, '_static')
+    return static_file(filename, root=static_dir)
 
 
 @app.route('/_list/')
@@ -108,7 +124,7 @@ def multisearch():
             s_r = docstore.search(idx, query, conf.indexroot)
             for r in s_r:  # flatten
                 results.append(r)
-            total += len(r)
+            total += len(s_r)
 
     ret = {
         "total": total,

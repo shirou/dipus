@@ -37,5 +37,7 @@ setup(
     packages = [
     'dipus',
     ],
+    package_data={'': ['src/dipus/_static', 'src/dipus/_templates']},
+    include_package_data=True
     )
 
