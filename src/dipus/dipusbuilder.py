@@ -89,7 +89,14 @@ class DipusBuilder(Builder):
     def get_target_uri(self, docname, typ=None):
         return ''
 
+    def check_deprecated_params(self):
+        if self.config.dipus_host_url is not None:
+            raise SphinxError("dipus_host_url is deprecated. \
+use dipus_server_url")
+
     def prepare_writing(self, docnames):
+        self.check_deprecated_params()
+
         self.writer = DipusWriter(self)
         if self.config.dipus_server_url is None:
             self.config.dipus_server_url = "http://{0}:{1}".format(
@@ -115,4 +122,7 @@ def setup(app):
     app.add_config_value('dipus_server_url', None, '')
     app.add_config_value('dipus_index', None, '')
     app.add_config_value('dipus_password', None, '')
+
+    # deperecated
+    app.add_config_value('dipus_host_url', None, '')
     app.add_builder(DipusBuilder)
