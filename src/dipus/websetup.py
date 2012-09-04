@@ -62,12 +62,17 @@ def updateDocument(_index):
     title = request.forms.get('title')
     if not title:
         title = ""
+
+    doc_url = request.forms.get('doc_url')
+    if not doc_url:
+        doc_url = ""
         
     posted = {
         '_index': _index.decode('utf-8'),
         'path': path.decode('utf-8'),
         'message': message.decode('utf-8'),
-        'title': title.decode('utf-8')
+        'title': title.decode('utf-8'),
+        'doc_url': doc_url.decode('utf-8')
         }
 
     ret = docstore.register(posted, conf.indexroot)

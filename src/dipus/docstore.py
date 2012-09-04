@@ -18,6 +18,7 @@ from whoosh import highlight
 schema = Schema(
     title=TEXT(stored=True),
     path=ID(stored=True, unique=True),  # TODO: non-alphabetical filename.
+    doc_url=TEXT(stored=True),
     content=NGRAM(stored=True, phrase=False, minsize=2, maxsize=4),
     date=DATETIME(stored=True)
     )
@@ -39,6 +40,7 @@ def register_worker():
                 title=posted['title'],
                 path=posted['path'],
                 date=datetime.now(),
+                doc_url=posted['doc_url'],
                 content=posted['message']
                 )
             writer.commit()
@@ -55,7 +57,7 @@ def register_worker():
         commit(posted)
         taskq.task_done()
         logging.info("commit done: left = {0}".format(taskq.qsize()))
-
+    
 
 def open_index(indexdir):
     if not os.path.exists(indexdir):
@@ -111,6 +113,7 @@ def search(_index, query, indexroot):
                 "_source": {
                 "title": r['title'],
                 "path": r['path'],
+                "doc_url": r['doc_url'],
                 "postDate": r['date'].isoformat(),
                 "message": t
                 }
