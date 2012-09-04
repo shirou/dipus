@@ -18,6 +18,17 @@ app = Bottle()
 conf = None
 
 
+def ret_jsonp(request, ret):
+    json_response = simplejson.dumps(ret)
+    response.content_type = 'application/json; charset=utf-8'
+
+    callback_function = request.GET.get('callback')
+    if callback_function:
+        json_response = ''.join([callback_function, '(', json_response, ')'])
+
+    return json_response
+
+
 def auth(password):
     ''' not implemented yet '''
     return True
@@ -104,15 +115,7 @@ def multisearch():
         "hits": results
         }
 
-    # FIXME: duplicate code.
-    json_response = simplejson.dumps(ret)
-    response.content_type = 'application/json; charset=utf-8'
-
-    callback_function = request.GET.get('callback')
-    if callback_function:
-        json_response = ''.join([callback_function, '(', json_response, ')'])
-
-    return json_response
+    return ret_jsonp(request, ret)
 
 
 @app.route('/<_index>/_search')
@@ -130,14 +133,7 @@ def query(_index):
         "hits": results
         }
 
-    json_response = simplejson.dumps(ret)
-    response.content_type = 'application/json; charset=utf-8'
-
-    callback_function = request.GET.get('callback')
-    if callback_function:
-        json_response = ''.join([callback_function, '(', json_response, ')'])
-
-    return json_response
+    return ret_jsonp(request, ret)
 
 
 if __name__ == '__main__':
