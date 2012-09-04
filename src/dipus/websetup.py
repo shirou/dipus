@@ -50,7 +50,7 @@ def listindex():
         "list": docstore.listindex(conf.indexroot)
         }
 
-    return simplejson.dumps(ret)
+    return ret_jsonp(request, ret)
 
 
 @app.route('/<_index>', method='POST')
