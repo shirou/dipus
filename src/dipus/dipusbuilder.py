@@ -107,7 +107,8 @@ use dipus_server_url")
             self.config.dipus_doc_url = "file:///{0}".format(html_dir)
         if self.config.dipus_index is None:
             # if dipus_index is not set, use project name
-            self.config.dipus_index = urllib.quote(self.config.project)
+            p_name = self.config.project.encode('utf-8')
+            self.config.dipus_index = urllib.quote(p_name)
 
         self.output_templates(self.config.dipus_server_url,
                               self.config.dipus_index)
