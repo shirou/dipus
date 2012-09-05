@@ -11,3 +11,7 @@ span.highlighted {
 ul.search li a{
 	font-weight: bold;
 }
+
+.navbar .brand {
+	text-transform: capitalize;
+}

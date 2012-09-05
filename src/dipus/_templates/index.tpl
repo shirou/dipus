@@ -49,7 +49,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">Search</a></li>
-              <li><a href="#admin">Admin</a></li>
+              <li><a href="#admin"><del>Admin</del></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
