@@ -126,7 +126,7 @@ var Search = {
 				  }
 			  };
 			  Search.stopPulse();
-			  Search.title.text(_('Search Results'));
+			  Search.title.text('');  // just remove "Searching..."
 			  if (json.hits.length === 0){
 				  Search.status.text(_('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.'));
 			  }else{

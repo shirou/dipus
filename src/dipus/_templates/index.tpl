@@ -45,10 +45,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Dipus</a>
+          <a class="brand" href="/">Dipus</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Search</a></li>
+              <li class="active"><a href="/">Search</a></li>
               <li><a href="#admin"><del>Admin</del></a></li>
             </ul>
           </div><!--/.nav-collapse -->
