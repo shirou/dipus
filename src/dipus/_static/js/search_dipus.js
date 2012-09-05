@@ -107,7 +107,7 @@ var Search = {
 		  success: function(json){
 			  for(var i = 0; i < json.hits.length; i++){
 				  var hit = json.hits[i];
-				  var listItem = $('<li style="display:none"></li>');
+				  var listItem = $('<li style="display:none">' + hit._index + ' : </li>');
 				  var msgbody = hit._source.message;
 				  listItem.append($('<a/>').attr('href',
 												 hit._source.doc_url + "/" + 
