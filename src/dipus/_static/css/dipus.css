@@ -29,6 +29,11 @@ color: black;
 text-rendering: optimizelegibility;
 }
 
+.label-info, .badge-info {
+	background-color: #3A87AD;
+	margin-right: 4px;
+}
+
 body {
 	color: #666666;
 }
