@@ -210,6 +210,7 @@ jQuery.fn.highlightText = function(text, className) {
 function _(s){return s;}
 
 $(document).ready(function() {
+	$("#q").focus();
 	get_index_list();
 	$("#search").submit(function() {
 		var indexes = [];
