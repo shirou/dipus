@@ -108,13 +108,13 @@ var Search = {
 		  success: function(json){
 			  for(var i = 0; i < json.hits.length; i++){
 				  var hit = json.hits[i];
-				  var index = '<span class="label label-info">' + hit._index + '</span>';
-				  var listItem = $('<li style="display:none">' + index + ' </li>');
+				  var indexlabel = '<span class="label label-info">' + hit._index + '</span>';
+				  var listItem = $('<li style="display:none"></li>');
 				  var msgbody = hit._source.message;
 				  listItem.append($('<a/>').attr('href',
 												 hit._source.doc_url + "/" + 
 												 hit._source.path + ".html" +
-												 highlightstring + query).html(hit._source.title));
+												 highlightstring + query).html(indexlabel + hit._source.title));
 				  if (msgbody) {
 					  listItem.append($.makeSearchSummary(msgbody, Array(query), Array(query)));
 					  Search.output.append(listItem);
