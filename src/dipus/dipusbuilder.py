@@ -61,9 +61,6 @@ class DipusBuilder(Builder):
     out_suffix = ''
 
     def output_templates(self, server_url, _index):
-        server_url = server_url.rstrip("/")
-        _index = _index.rstrip("/")
-
         dipus_url = "/".join([server_url, _index, "_search"])
 
         # TODO: fix if multiple html_static_path
@@ -109,6 +106,9 @@ use dipus_server_url")
             # if dipus_index is not set, use project name
             p_name = self.config.project.encode('utf-8')
             self.config.dipus_index = urllib.quote(p_name)
+
+        self.config.dipus_server_url = self.config.dipus_server_url.rstrip("/")
+        self.config.dipus_index = self.config.dipus_index.rstrip("/")
 
         self.output_templates(self.config.dipus_server_url,
                               self.config.dipus_index)
