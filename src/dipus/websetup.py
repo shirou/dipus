@@ -9,6 +9,11 @@ import logging
 from bottle import Bottle, route, run, request, response, abort
 from bottle import Jinja2Template
 from bottle import static_file
+
+# increase POST request body size
+import bottle
+bottle.BaseRequest.MEMFILE_MAX = 1024 * 1024
+
 import simplejson
 
 import docstore

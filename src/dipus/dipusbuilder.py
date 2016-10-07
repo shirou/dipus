@@ -36,6 +36,9 @@ class DipusWriter(writers.Writer):
 
     def write(self, docname, doctree, conf):
         title = self.getTitle(doctree)
+        if title is None:
+            title = docname
+
         params = urllib.urlencode({
             'path': docname.encode('utf-8'),
             'title': title.encode('utf-8'),
